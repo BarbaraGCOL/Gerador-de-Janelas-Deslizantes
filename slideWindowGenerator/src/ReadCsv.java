@@ -64,14 +64,14 @@ public class ReadCsv {
 
         int count = 0;
         
-        for(List<String>c: clusters){
+        for(List<String> c: clusters){
             genesData = searchClusterData(c);
             try {
                 generator.generateCsvList(count, genesData);
                 int j = 1;
-                generator.generateSlideWindow(count, genesData, j);
+                generator.generateSlideWindow(count, c, genesData, j);
                 j = 2;
-                generator.generateSlideWindow(count, genesData, j);
+                generator.generateSlideWindow(count, c, genesData, j);
             } catch (IOException e) {
                 e.printStackTrace();
             }

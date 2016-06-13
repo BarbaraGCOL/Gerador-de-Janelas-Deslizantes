@@ -10,7 +10,12 @@ import java.util.List;
  */
 public class GenerateCsv
 {
-    public void generateSlideWindow(int idCluster, List<List<String>>datas, int j)throws IOException{
+    private static final String COMMA_DELIMITER = ",";
+    private static final String NEW_LINE_SEPARATOR = "\n";
+	
+    public void generateSlideWindow(int idCluster, List<String> seqs, 
+    		List<List<String>>datas, int j)throws IOException{
+    	
         String sFile;
         FileWriter writer = null;
 
@@ -29,27 +34,27 @@ public class GenerateCsv
 
             int stop = 0;
             
-            for(int idGene = 0; idGene < datas.size(); idGene ++){
-                writer.append("seq"+idGene);
-                writer.append(';');
+            for(String idSeq: seqs){
+                writer.append("seq"+idSeq);
+                writer.append(COMMA_DELIMITER);
             }
             
-            writer.append("alvo_seq"+seq);
-            writer.append(';');
-            writer.append("\n");
+            writer.append("alvo_seq"+seqs.get(seq));
+//            writer.append(COMMA_DELIMITER);
+            writer.append(NEW_LINE_SEPARATOR);
             
             for(int i = 0; i < interval; i++){
                 for(List<String> geneData: datas){
                     stop = i + j;
                     for(int count = i; count < stop; count++){
                         writer.append(geneData.get(count)+"");
-                        writer.append(';');
+                        writer.append(COMMA_DELIMITER);
                     }
                 }
 
-                writer.append(datas.get(seq).get(i+1)+"");
-                writer.append(';');
-                writer.append("\n");
+                writer.append(datas.get(seq).get(i+j)+"");
+//                writer.append(COMMA_DELIMITER);
+                writer.append(NEW_LINE_SEPARATOR);
                 writer.flush();
             }
             writer.close();
@@ -69,9 +74,9 @@ public class GenerateCsv
         for(List<String> data: datas){
             for(String value: data){
                 writer.append(value+"");
-                writer.append(';');
+                writer.append(COMMA_DELIMITER);
             }
-            writer.append("\n");
+            writer.append(NEW_LINE_SEPARATOR);
             writer.flush();
         }
         writer.close();

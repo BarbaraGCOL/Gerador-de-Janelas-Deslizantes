@@ -8,18 +8,21 @@ import weka.core.converters.CSVLoader;
 public class CSV2Arff {
     public void generateArff(String csv, String arff) throws IOException{
 
-        // load CSV
-        CSVLoader loader = new CSVLoader();
-        
-        loader.setSource(new File(csv));
-        Instances data = loader.getDataSet();
+    	try{
+	    	// load the CSV file (input file)
+	    	CSVLoader loader = new CSVLoader();
+	        loader.setSource(new File(csv));
+	        loader.setNoHeaderRowPresent(false);
+	        loader.setFieldSeparator(",");
+	        Instances data = loader.getDataSet();
 
-        // save ARFF
-        ArffSaver saver = new ArffSaver();
-        saver.setInstances(data);
-        saver.setFile(new File(arff));
-//        saver.setDestination(new File(arff));
-        saver.writeBatch();
-
+	        // save as an  ARFF (output file)
+	        ArffSaver saver = new ArffSaver();
+	        saver.setInstances(data);
+	        saver.setFile(new File(arff));
+	        saver.writeBatch();
+        }
+        catch(Exception e){
+        }
     }
 }
