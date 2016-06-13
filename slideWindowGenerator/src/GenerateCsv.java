@@ -35,12 +35,13 @@ public class GenerateCsv
             int stop = 0;
             
             for(String idSeq: seqs){
-                writer.append("seq"+idSeq);
-                writer.append(COMMA_DELIMITER);
+                for(int i = 1; i <= j; i++){
+                    writer.append("seq"+idSeq+"(t - "+i+")");
+                    writer.append(COMMA_DELIMITER);
+                }
             }
             
             writer.append("alvo_seq"+seqs.get(seq));
-//            writer.append(COMMA_DELIMITER);
             writer.append(NEW_LINE_SEPARATOR);
             
             for(int i = 0; i < interval; i++){
@@ -53,7 +54,6 @@ public class GenerateCsv
                 }
 
                 writer.append(datas.get(seq).get(i+j)+"");
-//                writer.append(COMMA_DELIMITER);
                 writer.append(NEW_LINE_SEPARATOR);
                 writer.flush();
             }
