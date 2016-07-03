@@ -23,6 +23,7 @@ public class CSV2Arff {
 	        saver.writeBatch();
         }
         catch(Exception e){
+        	System.out.println(e);
         }
     }
 }
